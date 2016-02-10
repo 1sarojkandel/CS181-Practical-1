@@ -53,11 +53,17 @@ RF = RandomForestRegressor()
 RF.fit(X_train, Y_train)
 RF_pred = RF.predict(X_test)
 
+clf = linear_model.Lasso(alpha=0.000001)
+clf.fit(X_train, Y_train)
+Lasso_pred=clf.predict(X_test)
+
+
 def write_to_file(filename, predictions):
     with open(filename, "w") as f:
         f.write("Id,Prediction\n")
         for i,p in enumerate(predictions):
             f.write(str(i+1) + "," + str(p) + "\n")
 
-write_to_file("sample1.csv", LR_pred)
-write_to_file("sample2.csv", RF_pred)
+#write_to_file("sample1.csv", LR_pred)
+#write_to_file("sample2.csv", RF_pred)
+write_to_file("sample_lasso.csv", Lasso_pred)
